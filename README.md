@@ -1,6 +1,6 @@
 # PWIN - Statistical Model for Sport
 
-This project was created to development statistical model to estimate probability win to sport and to calculate optimal allocation asset if you need to betting.
+This project was created to development statistical model to estimate probability win for players and to calculate optimal allocation asset if you need to use this probability for own betting.
 
 ## main file explanation
 
