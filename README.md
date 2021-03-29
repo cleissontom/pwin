@@ -4,7 +4,7 @@ read_data_betfair.py
 	- converter file uploded by betfair website to formated file
 	- input file: file C:\\Users\\caval\\Desktop\\Greyhound\\data_betfair_ods\\Oct
 	- output file: 'oct_2020.csv'
-	- columns name
+	* columns name
 		id_bet	
 		name_racing	
 		local_racing	
