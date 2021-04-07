@@ -1,9 +1,4 @@
 
-from bs4 import BeautifulSoup
-import requests
-import numpy as np
-
-
 #
 # first_url = "https://greyhoundbet.racingpost.com/#result-meeting"
 #
@@ -154,73 +149,5 @@ import numpy as np
 # my_all = soup.find_all("span", {"class": "a-size-medium a-color-base a-text-normal"})
 #
 # print(my_all)
-
-
-
-data
-
-#####################################
-# part 1
-date_filter = "02-03-2021"
-full_url2 = "https://www.ukdogracing.net/racecards/" + date_filter
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
-page = requests.get(full_url2, headers=headers)
-print('url crawing: ',full_url2)
-
-soup = BeautifulSoup(page.content, 'html.parser')
-
-links_with_text = []
-for a in soup.find_all('a', href=True):
-    if a.text:
-        links_with_text.append(a['href'])
-
-urls_to_crawler = np.unique([elem for elem in links_with_text if  'results/' + date_filter in elem])
-
-#########################################
-# part 2
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
-
-
-data = []
-for url in urls_to_crawler[0:1]:
-    full_url = "https://www.ukdogracing.net/" + url
-    page = requests.get(full_url, headers=headers)
-    print('url crawing: ',full_url)
-
-    soup = BeautifulSoup(page.content, 'html.parser')
-
-    table = soup.find('table', class_='racecard-table')
-    rows = table.find_all('tr', class_='order-by-pos')
-
-    for row in rows:
-        cols = row.find_all('td')
-        cols = [ele.text.strip() for ele in cols]
-        data.append(cols)
-
-
-
-    time_and_local_race = soup.find('div',class_='ctleft').text
-
-    time_race = time_and_local_race[0:5]
-    local_race = time_and_local_race[6:9999]
-
-    print(time_race)
-    print(local_race)
-    order_race_grade_distance = soup.find('div',class_='ctright').text
-
-    index_separate1 = order_race_grade_distance.find(',')
-    order_race = order_race_grade_distance[0:index_separate1]
-
-
-    grade_distance = order_race_grade_distance[(index_separate1+2):9999]
-
-    index_separate2 = grade_distance.find(' ')
-
-    grade_race = grade_distance[0:index_separate2]
-    distance_race = grade_distance[(index_separate2+1):9999]
-
-    print(order_race)
-    print(grade_race)
-    print(distance_race)
 
 
